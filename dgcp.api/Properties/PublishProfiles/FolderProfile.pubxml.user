@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\projects\net\dgcp.api\dgcp.api\bin\Release\net7.0\publish\</_PublishTargetUrl>
+    <History>True|2023-07-21T16:32:27.4778336Z;True|2023-07-21T12:31:42.2525489-04:00;True|2023-07-21T12:31:04.8223917-04:00;True|2023-07-21T12:30:10.7450801-04:00;True|2023-07-21T12:20:15.8823823-04:00;True|2023-07-21T12:16:44.2981452-04:00;True|2023-07-21T12:15:00.8650109-04:00;True|2023-07-21T12:14:19.4067610-04:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=%28LocalDB%29\MSSQLLocalDB%3bDatabase=MyDatabase1.mdf%3bIntegrated Security=True</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
