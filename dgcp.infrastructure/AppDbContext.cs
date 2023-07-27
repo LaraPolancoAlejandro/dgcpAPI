@@ -5,7 +5,7 @@ namespace dgcp.infrastructure
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { this.Database.SetCommandTimeout(3000); }
 
         public DbSet<Tender> Tenders { get; set; }
         public DbSet<TenderFinal> TendersFinal { get; set; }

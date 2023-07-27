@@ -9,8 +9,8 @@ namespace dgcp.domain.Abstractions;
 public interface IDataService
 {
     Task SaveChangesAsync();
-    Task<Paged<Tender>> GetTenderPagedAsync(int? page = default, int? limit = default);
-
+    //Task<Paged<Tender>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default);
+    Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default);
     Task AddTenderAsync(Tender tender);
     Task<List<string>> GetAllFinalOcidsAsync();
     Task<List<VisitedUrl>> GetAllVisitedUrlsAsync();
