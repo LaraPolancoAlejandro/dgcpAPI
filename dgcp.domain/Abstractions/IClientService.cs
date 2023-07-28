@@ -7,6 +7,6 @@ namespace dgcp.domain.Abstractions;
 /// </summary>
 public interface IClientService
 {
-    Task<List<PageDto>> GetReleaseDataAsync(string host = default, int limit = 4, int year = 2023);
+    Task<List<PageDto>> GetReleaseDataAsync(string host = default, int limit = 500, int year = 2023);
     Task<ReleaseRootDto> GetReleaseRootAsync(string url);
 }

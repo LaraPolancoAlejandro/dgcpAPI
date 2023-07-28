@@ -2,11 +2,13 @@
 using dgcp.domain.Models;
 using dgcp.service.Dtos;
 using Microsoft.Extensions.Options;
+using System.Threading;
 
 namespace dgcp.api;
 
 public class BackgroundWorker : BackgroundService
 {
+    private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 10);
     private IClientService _api;
     private IDataService _db;
     private readonly IOptions<ApiSettings> _settings;
@@ -59,71 +61,95 @@ public class BackgroundWorker : BackgroundService
 
     private async Task ProcessPageItemAsync(PageItemDto pageItem)
     {
-        var root = await _api.GetReleaseRootAsync(pageItem.Url);
-        if (root?.Releases != null)
+        await _semaphore.WaitAsync();
+        try
         {
-            foreach (var release in root.Releases)
+            using var scope = this._scope.CreateScope();
+            var api = scope.ServiceProvider.GetRequiredService<IClientService>();
+            var db = scope.ServiceProvider.GetRequiredService<IDataService>();
+            var root = await _api.GetReleaseRootAsync(pageItem.Url);
+            if (root?.Releases != null)
             {
-                if (release != null)
+                foreach (var release in root.Releases)
                 {
-                    if (await _db.GetTenderByIdAsync(release.Ocid) != null)
+                    if (release != null)
                     {
-                        continue;
+                        if (await _db.GetTenderByIdAsync(release.Ocid) != null)
+                        {
+                            continue;
+                        }
+
+                        var tender = new Tender
+                        {
+                            ReleaseId = release.Id,
+                            ReleaseOcid = release.Ocid,
+                            TenderId = release.Tender.Id,
+
+                            Publisher = root.Publisher.Name,
+                            PublishedDate = root.PublishedDate,
+                            PublicationPolicy = root.PublicationPolicy,
+
+                            Description = release.Tender.Description,
+
+                            Date = release.Date,
+
+                            Status = release.Tender.Status,
+                            Amount = release.Tender.Value.Amount,
+                            Currency = release.Tender.Value.Currency,
+
+                            ProcuringEntity = release.Tender.ProcuringEntity.Name,
+
+                            StartDate = release.Tender.TenderPeriod.StartDate,
+                            EndDate = release.Tender.TenderPeriod.EndDate,
+
+                            DocumentUrl = release.Tender.Documents.First().url
+                        };
+
+                        if (release.Tender.Items != null)
+                        {
+                            tender.Items = release.Tender.Items.Select(e =>
+                                new TenderItem { Classification = int.Parse(e.Classification.Id.ToString()) }).ToList();
+                        }
+                        await _db.AddTenderAsync(tender);
                     }
-
-                    var tender = new Tender
-                    {
-                        ReleaseId = release.Id,
-                        ReleaseOcid = release.Ocid,
-                        TenderId = release.Tender.Id,
-
-                        Publisher = root.Publisher.Name,
-                        PublishedDate = root.PublishedDate,
-                        PublicationPolicy = root.PublicationPolicy,
-
-                        Description = release.Tender.Description,
-
-                        Date = release.Date,
-
-                        Status = release.Tender.Status,
-                        Amount = release.Tender.Value.Amount,
-                        Currency = release.Tender.Value.Currency,
-
-                        ProcuringEntity = release.Tender.ProcuringEntity.Name,
-
-                        StartDate = release.Tender.TenderPeriod.StartDate,
-                        EndDate = release.Tender.TenderPeriod.EndDate,
-
-                        DocumentUrl = release.Tender.Documents.First().url
-                    };
-
-                    if (release.Tender.Items != null)
-                    {
-                        tender.Items = release.Tender.Items.Select(e =>
-                            new TenderItem { Classification = int.Parse(e.Classification.Id.ToString()) }).ToList();
-                    }
-                    await _db.AddTenderAsync(tender);
+                    else _logger.LogInformation("Se encontró un release null en la lista de Releases.");
                 }
-                else _logger.LogInformation("Se encontró un release null en la lista de Releases.");
+                await _db.SaveChangesAsync();
             }
-            await _db.SaveChangesAsync();
         }
+        finally
+        {
+            _semaphore.Release();
+        }
+        
     }
     private async Task UpdateTenderStatusAsync(string ocid)
     {
-        var root = await _api.GetReleaseRootAsync($"{this._settings.Value.Host}/release/{ocid}");
-        if (root?.Releases != null)
+        await _semaphore.WaitAsync();
+        try
         {
-            foreach (var release in root.Releases)
+            using var scope = this._scope.CreateScope();
+            var api = scope.ServiceProvider.GetRequiredService<IClientService>();
+            var db = scope.ServiceProvider.GetRequiredService<IDataService>();
+            var root = await _api.GetReleaseRootAsync($"{this._settings.Value.Host}/release/{ocid}");
+            if (root?.Releases != null)
             {
-                var existingTenderFinal = await _db.GetTenderFinalByIdAsync(release.Tender.Id);
-                if (existingTenderFinal != null && existingTenderFinal.Status != release.Tender.Status)
+                foreach (var release in root.Releases)
                 {
-                    existingTenderFinal.Status = release.Tender.Status;
-                    await _db.UpdateTenderFinalAsync(existingTenderFinal);
+                    var existingTenderFinal = await _db.GetTenderFinalByIdAsync(release.Tender.Id);
+                    if (existingTenderFinal != null && existingTenderFinal.Status != release.Tender.Status)
+                    {
+                        existingTenderFinal.Status = release.Tender.Status;
+                        await _db.UpdateTenderFinalAsync(existingTenderFinal);
+                    }
                 }
+                await _db.SaveChangesAsync();
             }
-            await _db.SaveChangesAsync();
         }
+        finally
+        {
+            _semaphore.Release();
+        }
+        
     }
 }
