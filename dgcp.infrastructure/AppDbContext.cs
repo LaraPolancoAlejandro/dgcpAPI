@@ -55,6 +55,7 @@ namespace dgcp.infrastructure
             modelBuilder.Entity<TenderFinal>(entity =>
             {
                 entity.HasKey(e => e.ReleaseOcid);
+
             });
         }
     }

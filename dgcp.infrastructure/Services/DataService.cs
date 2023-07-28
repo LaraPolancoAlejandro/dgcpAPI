@@ -124,17 +124,15 @@ namespace dgcp.infrastructure.Services
             else
             {
                 // El registro ya existe, puedes decidir qué hacer aquí.
-                if (tender.Status != "active")
-                {
-                    // Si el estado ya no es 'active', elimina el registro
-                    await RemoveTenderFinal(existingTender);
-                }
-                else
-                {
-                    // Si el estado sigue siendo 'active', actualiza el registro
-                    // Copia las propiedades de 'tender' a 'existingTender' aquí
-                    await UpdateTenderFinalAsync(existingTender);
-                }
+                //if (tender.Status != "active")
+                //{
+                //    // Si el estado ya no es 'active', elimina el registro
+                //    await RemoveTenderFinal(existingTender);
+                //}
+
+                // Si el estado sigue siendo 'active', actualiza el registro
+                // Copia las propiedades de 'tender' a 'existingTender' aquí
+                await UpdateTenderFinalAsync(existingTender);
             }
         }
         public async Task AddVisitedUrlAsync(VisitedUrl visitedUrl)
@@ -157,8 +155,12 @@ namespace dgcp.infrastructure.Services
             var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync();
 
             // Then, we filter the Tenders in memory
-            return tenders.Where(t => t.Status == "active"
-            && ((t.Description != null && keywords.Any(kw => t.Description.Contains(kw)))
+            //return tenders.Where(t => t.Status == "active"
+            //&& ((t.Description != null && keywords.Any(kw => t.Description.Contains(kw)))
+            //|| (t.Items != null && t.Items.Any(i => categories.Contains(i.Classification))))).ToList();
+
+            // Then, we filter the Tenders in memory
+            return tenders.Where(t => ((t.Description != null && keywords.Any(kw => t.Description.Contains(kw)))
             || (t.Items != null && t.Items.Any(i => categories.Contains(i.Classification))))).ToList();
         }
 
