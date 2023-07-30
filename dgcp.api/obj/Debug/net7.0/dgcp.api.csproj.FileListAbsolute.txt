@@ -132,7 +132,6 @@ G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.GeneratedMSBuildEditorCo
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.AssemblyInfoInputs.cache
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.AssemblyInfo.cs
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.csproj.CoreCompileInputs.cache
-G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.MvcApplicationPartsAssemblyInfo.cs
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\dgcp.api.MvcApplicationPartsAssemblyInfo.cache
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\staticwebassets\msbuild.dgcp.api.Microsoft.AspNetCore.StaticWebAssets.props
 G:\dgcp.api\dgcp.api\dgcp.api\obj\Debug\net7.0\staticwebassets\msbuild.build.dgcp.api.props

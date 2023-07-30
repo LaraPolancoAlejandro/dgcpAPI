@@ -44,7 +44,7 @@ public class BackgroundWorker : BackgroundService
             }
 
             await Task.WhenAll(tasks);
-            await this._db.FilterAndInsertTendersAsync(_settings.Value.Keywords, _settings.Value.Categories);
+            await this._db.FilterAndInsertTendersAsync();
 
             var ocids = await this._db.GetAllFinalOcidsAsync();
             tasks = new List<Task>();
