@@ -6,49 +6,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using dgcp.api;
 
+
 namespace dgcp.infrastructure.Services
 {
     internal class DataService : IDataService
     {
         private readonly AppDbContext _ctx;
         private readonly ApiSettings _apiSettings;
-
-        public DataService(AppDbContext ctx, IOptions<ApiSettings> apiSettings)
+        private readonly IConfiguration _configuration;
+        public DataService(AppDbContext ctx, IOptions<ApiSettings> apiSettings, IConfiguration configuration)
         {
             _ctx = ctx;
             _apiSettings = apiSettings.Value;
+            _configuration = configuration;
         }
-
-        //public async Task<Paged<Tender>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default)
-        //{
-        //    var paged = new Paged<Tender>(page, limit);
-
-        //    IQueryable<Tender> query = this._ctx.Tenders.Include(t => t.Items);
-
-        //    var keywords = _apiSettings.Keywords;
-        //    var categories = _apiSettings.Categories;
-
-        //    if (startDate.HasValue)
-        //    {
-        //        query = query.Where(t => t.StartDate >= startDate.Value);
-        //    }
-
-        //    var tenders = await query.ToListAsync();
-
-        //    if ((keywords != null && keywords.Length > 0) || (categories != null && categories.Length > 0))
-        //    {
-        //        tenders = tenders.Where(t => t.Status == "active" &&
-        //            ((t.Description != null && keywords != null && keywords.Any(kw => t.Description.Contains(kw))) ||
-        //            (t.Items != null && categories != null && t.Items.Any(i => categories.Contains(i.Classification))))).ToList();
-        //    }
-
-        //    paged.Items = tenders.OrderByDescending(x => x.StartDate)
-        //        .Skip(paged.Skip)
-        //        .Take(paged.Limit)
-        //        .ToList();
-
-        //    return paged;
-        //}
 
         public async Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default)
         {
@@ -87,7 +58,7 @@ namespace dgcp.infrastructure.Services
         public async Task AddTenderToFinalAsync(Tender tender)
         {
             var existingTender = await _ctx.TendersFinal
-        .FirstOrDefaultAsync(t => t.ReleaseOcid == tender.ReleaseOcid);
+            .FirstOrDefaultAsync(t => t.ReleaseOcid == tender.ReleaseOcid);
 
             if (existingTender == null)
             {
@@ -114,7 +85,8 @@ namespace dgcp.infrastructure.Services
                     StartDate = tender.StartDate,
                     EndDate = tender.EndDate,
 
-                    DocumentUrl = tender.DocumentUrl
+                    DocumentUrl = tender.DocumentUrl,
+                    Empresa = tender.Empresa
                 };
 
                 _ctx.TendersFinal.Add(tenderFinal);
@@ -131,6 +103,7 @@ namespace dgcp.infrastructure.Services
 
                 // Si el estado sigue siendo 'active', actualiza el registro
                 // Copia las propiedades de 'tender' a 'existingTender' aquí
+                existingTender.Empresa = tender.Empresa;
                 await UpdateTenderFinalAsync(existingTender);
             }
         }
@@ -140,29 +113,77 @@ namespace dgcp.infrastructure.Services
             await this._ctx.SaveChangesAsync();
         }
 
-        public async Task FilterAndInsertTendersAsync(string[] keywords, int[] categories)
+        public async Task FilterAndInsertTendersAsync()
         {
-            var filteredTenders = await GetFilteredTendersAsync(keywords, categories);
+            var filteredTenders = await GetFilteredTendersAsync();
+            var empresaSettings = GetEmpresaSettings(); // This method would return the settings for each company
+
             foreach (var tender in filteredTenders)
             {
+                // Create a list to store the names of the companies
+                List<string> empresas = new List<string>();
+
+                // Determine which company the tender belongs to
+                foreach (var empresa in empresaSettings)
+                {
+                    if (tender.Items.Any(i => empresa.Categories.Contains(i.Classification))
+                        || empresa.Keywords.Any(kw => tender.Description.Contains(kw)))
+                    {
+                        // Add the company name to the list
+                        empresas.Add(empresa.Name);
+                    }
+                }
+
+                // Assign the company names to the tender
+                tender.Empresa = string.Join(", ", empresas);
+
                 await AddTenderToFinalAsync(tender);
             }
         }
-        public async Task<List<Tender>> GetFilteredTendersAsync(string[] keywords, int[] categories)
+
+        public List<EmpresaSettings> GetEmpresaSettings()
         {
+            // Get the configuration from appsettings.json
+            var configuration = _configuration;
+
+            // Get the settings for each company
+            var empresaSettings = new List<EmpresaSettings>();
+            var empresasConfig = configuration.GetSection("Empresas").GetChildren();
+
+            foreach (var empresaConfig in empresasConfig)
+            {
+                var empresaSetting = new EmpresaSettings
+                {
+                    Name = empresaConfig.Key,
+                    Categories = empresaConfig.GetSection("Categories").GetChildren().Select(c => int.Parse(c.Value)).ToArray(),
+                    Keywords = empresaConfig.GetSection("Keywords").GetChildren().Select(c => c.Value).ToArray()
+                };
+
+                // If the company doesn't have any keywords, assign an empty array
+                if (empresaSetting.Keywords == null || empresaSetting.Keywords.Length == 0)
+                {
+                    empresaSetting.Keywords = new string[0];
+                }
+
+                empresaSettings.Add(empresaSetting);
+            }
+
+            return empresaSettings;
+        }
+
+        public async Task<List<Tender>> GetFilteredTendersAsync()
+        {
+            // Get all keywords and categories from all companies
+            var allKeywords = this._apiSettings.Empresas.SelectMany(e => e.Value.Keywords).ToArray();
+            var allCategories = this._apiSettings.Empresas.SelectMany(e => e.Value.Categories).ToArray();
+
             // First, we get all the Tenders and their Items from the database
             var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync();
 
             // Then, we filter the Tenders in memory
-            //return tenders.Where(t => t.Status == "active"
-            //&& ((t.Description != null && keywords.Any(kw => t.Description.Contains(kw)))
-            //|| (t.Items != null && t.Items.Any(i => categories.Contains(i.Classification))))).ToList();
-
-            // Then, we filter the Tenders in memory
-            return tenders.Where(t => ((t.Description != null && keywords.Any(kw => t.Description.Contains(kw)))
-            || (t.Items != null && t.Items.Any(i => categories.Contains(i.Classification))))).ToList();
+            return tenders.Where(t => ((t.Description != null && allKeywords.Any(kw => t.Description.Contains(kw)))
+            || (t.Items != null && t.Items.Any(i => allCategories.Contains(i.Classification))))).ToList();
         }
-
 
         public Task UpdateTenderFinalAsync(TenderFinal tenderFinal)
         {

@@ -15,12 +15,12 @@ public interface IDataService
     Task<List<string>> GetAllFinalOcidsAsync();
     Task<List<VisitedUrl>> GetAllVisitedUrlsAsync();
     Task<Tender> GetTenderByIdAsync(string releaseOcid);
-    Task<List<Tender>> GetFilteredTendersAsync(string[] keywords, int[] categories);
+    Task<List<Tender>> GetFilteredTendersAsync();
     Task<TenderFinal> GetTenderFinalByIdAsync(string tenderId);
 
     Task AddVisitedUrlAsync(VisitedUrl visitedUrl);
     Task AddTenderToFinalAsync(Tender tender);
-    Task FilterAndInsertTendersAsync(string[] keywords, int[] categories);
+    Task FilterAndInsertTendersAsync();
 
     Task UpdateTenderFinalAsync(TenderFinal tenderFinal);
     Task RemoveTenderFinal(TenderFinal tenderFinal);

@@ -28,5 +28,6 @@ public class Tender
     public List<TenderItem> Items { get; set; } = new List<TenderItem>();
 
     public string DocumentUrl { get; set; }
+    public string Empresa { get; set; }
 
 }

@@ -18,5 +18,6 @@ public class TenderFinal
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public string DocumentUrl { get; set; }
+    public string Empresa { get; set; }
 }
 
