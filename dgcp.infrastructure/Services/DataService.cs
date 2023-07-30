@@ -173,17 +173,14 @@ namespace dgcp.infrastructure.Services
 
         public async Task<List<Tender>> GetFilteredTendersAsync()
         {
-            // Get all keywords and categories from all companies
-            var allKeywords = this._apiSettings.Empresas.SelectMany(e => e.Value.Keywords).ToArray();
-            var allCategories = this._apiSettings.Empresas.SelectMany(e => e.Value.Categories).ToArray();
+            var allKeywords = this._apiSettings.Empresas?.SelectMany(e => e.Value.Keywords).ToArray() ?? new string[0];
+            var allCategories = this._apiSettings.Empresas?.SelectMany(e => e.Value.Categories).ToArray() ?? new int[0];
+            var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync() ?? new List<Tender>();
 
-            // First, we get all the Tenders and their Items from the database
-            var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync();
+            return tenders.Where(t => ((t.Description != null && allKeywords.Any(kw => t.Description.Contains(kw))) || (t.Items != null && t.Items.Any(i => allCategories.Contains(i.Classification))))).ToList();
 
-            // Then, we filter the Tenders in memory
-            return tenders.Where(t => ((t.Description != null && allKeywords.Any(kw => t.Description.Contains(kw)))
-            || (t.Items != null && t.Items.Any(i => allCategories.Contains(i.Classification))))).ToList();
         }
+
 
         public Task UpdateTenderFinalAsync(TenderFinal tenderFinal)
         {
