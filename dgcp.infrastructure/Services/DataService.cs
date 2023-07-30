@@ -50,15 +50,19 @@ namespace dgcp.infrastructure.Services
         //    return paged;
         //}
 
-        public async Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default)
+        public async Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default)
         {
             var paged = new Paged<TenderFinal>(page, limit);
-
             IQueryable<TenderFinal> query = this._ctx.TendersFinal;
 
             if (startDate.HasValue)
             {
                 query = query.Where(t => t.StartDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(t => t.StartDate <= endDate.Value);
             }
 
             paged.Items = await query.OrderByDescending(x => x.StartDate)
@@ -68,11 +72,6 @@ namespace dgcp.infrastructure.Services
 
             return paged;
         }
-
-
-
-
-
 
         public Task<List<string>> GetAllFinalOcidsAsync() => this._ctx.TendersFinal.Select(t => t.ReleaseOcid).ToListAsync();
 
