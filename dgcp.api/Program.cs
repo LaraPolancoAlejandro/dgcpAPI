@@ -21,9 +21,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/api/v1/tenders", (IDataService service, int? page, int? limit, DateTime? startDate) =>
+app.MapGet("/api/v1/tenders", (IDataService service, int? page, int? limit, DateTime? startDate, DateTime? endDate) =>
 {
-    return service.GetTenderPagedAsync(page, limit, startDate);
+    return service.GetTenderPagedAsync(page, limit, startDate, endDate);
 });
 
 
