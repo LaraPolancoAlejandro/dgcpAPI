@@ -86,7 +86,7 @@ namespace dgcp.infrastructure.Services
                     EndDate = tender.EndDate,
 
                     DocumentUrl = tender.DocumentUrl,
-                    Empresa = tender.Empresa
+                    EmpresaIds = tender.EmpresaIds
                 };
 
                 _ctx.TendersFinal.Add(tenderFinal);
@@ -103,7 +103,7 @@ namespace dgcp.infrastructure.Services
 
                 // Si el estado sigue siendo 'active', actualiza el registro
                 // Copia las propiedades de 'tender' a 'existingTender' aquí
-                existingTender.Empresa = tender.Empresa;
+                existingTender.EmpresaIds = tender.EmpresaIds;
                 await UpdateTenderFinalAsync(existingTender);
             }
         }
@@ -122,6 +122,7 @@ namespace dgcp.infrastructure.Services
             {
                 // Create a list to store the names of the companies
                 List<string> empresas = new List<string>();
+                List<int> empresaIds = new List<int>();
 
                 // Determine which company the tender belongs to
                 foreach (var empresa in empresaSettings)
@@ -129,16 +130,18 @@ namespace dgcp.infrastructure.Services
                     if (tender.Items.Any(i => empresa.Categories.Contains(i.Classification))
                         || empresa.Keywords.Any(kw => tender.Description.Contains(kw)))
                     {
-                        // Add the company name to the list
-                        empresas.Add(empresa.Name);
+
+                        // Add the company id to the list
+                        empresaIds.Add(empresa.Id);
                     }
                 }
 
-                // Assign the company names to the tender
-                tender.Empresa = string.Join(", ", empresas);
+                // Assign the company ids to the tender
+                tender.EmpresaIds = string.Join(",", empresaIds);
 
                 await AddTenderToFinalAsync(tender);
             }
+
         }
 
         public List<EmpresaSettings> GetEmpresaSettings()
@@ -173,14 +176,44 @@ namespace dgcp.infrastructure.Services
 
         public async Task<List<Tender>> GetFilteredTendersAsync()
         {
-            var allKeywords = this._apiSettings.Empresas?.SelectMany(e => e.Value.Keywords).ToArray() ?? new string[0];
-            var allCategories = this._apiSettings.Empresas?.SelectMany(e => e.Value.Categories).ToArray() ?? new int[0];
-            var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync() ?? new List<Tender>();
+            // Get all keywords and categories from all companies
+            var allKeywords = this._apiSettings.Empresas.SelectMany(e => e.Value.Keywords).ToArray();
+            var allCategories = this._apiSettings.Empresas.SelectMany(e => e.Value.Categories).ToArray();
 
-            return tenders.Where(t => ((t.Description != null && allKeywords.Any(kw => t.Description.Contains(kw))) || (t.Items != null && t.Items.Any(i => allCategories.Contains(i.Classification))))).ToList();
+            // First, we get all the Tenders and their Items from the database
+            var tenders = await this._ctx.Tenders.Include(t => t.Items).ToListAsync();
 
+            // Then, we filter the Tenders in memory
+            List<Tender> filteredTenders = new List<Tender>();
+
+            foreach (var tender in tenders)
+            {
+                if (tender.Items != null)
+                {
+                    foreach (var item in tender.Items)
+                    {
+                        if (allCategories.Contains(item.Classification))
+                        {
+                            filteredTenders.Add(tender);
+                            break;
+                        }
+                    }
+                }
+
+                if (!filteredTenders.Contains(tender) && tender.Description != null)
+                {
+                    foreach (var keyword in allKeywords)
+                    {
+                        if (tender.Description.Contains(keyword))
+                        {
+                            filteredTenders.Add(tender);
+                            break;
+                        }
+                    }
+                }
+            }
+            return filteredTenders;
         }
-
 
         public Task UpdateTenderFinalAsync(TenderFinal tenderFinal)
         {

@@ -2,8 +2,6 @@
 
 public class Tender
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-
     public string ReleaseOcid { get; set; }
     public string ReleaseId { get; set; }
     public string TenderId { get; set; }
@@ -28,6 +26,6 @@ public class Tender
     public List<TenderItem> Items { get; set; } = new List<TenderItem>();
 
     public string DocumentUrl { get; set; }
-    public string Empresa { get; set; }
+    public string? EmpresaIds { get; set; }
 
 }

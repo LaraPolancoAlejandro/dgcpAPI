@@ -2,7 +2,6 @@
 
 public class TenderFinal
 {
-    public Guid Id { get; set; }
     public string ReleaseId { get; set; }
     public string ReleaseOcid { get; set; }
     public string TenderId { get; set; }
@@ -18,6 +17,6 @@ public class TenderFinal
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public string DocumentUrl { get; set; }
-    public string Empresa { get; set; }
+    public string EmpresaIds { get; set; }
 }
 
