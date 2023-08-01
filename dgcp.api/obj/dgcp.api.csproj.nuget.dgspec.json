@@ -1,29 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "G:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj": {}
+    "D:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj": {}
   },
   "projects": {
-    "G:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj": {
+    "D:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
+        "projectUniqueName": "D:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
         "projectName": "dgcp.api",
-        "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
+        "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
         "packagesPath": "C:\\Users\\ALP54\\.nuget\\packages\\",
-        "outputPath": "G:\\dgcp.api\\dgcp.api\\dgcp.api\\obj\\",
+        "outputPath": "D:\\dgcp.api\\dgcp.api\\dgcp.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\ALP54\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
@@ -32,11 +34,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
-                "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj"
+              "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
+                "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj"
               },
-              "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj": {
-                "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj"
+              "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj": {
+                "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj"
               }
             }
           }
@@ -93,26 +95,28 @@
         }
       }
     },
-    "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
+    "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
+        "projectUniqueName": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
         "projectName": "dgcp.domain",
-        "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
+        "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
         "packagesPath": "C:\\Users\\ALP54\\.nuget\\packages\\",
-        "outputPath": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\obj\\",
+        "outputPath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\ALP54\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -151,26 +155,28 @@
         }
       }
     },
-    "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj": {
+    "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
+        "projectUniqueName": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
         "projectName": "dgcp.infrastructure",
-        "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
+        "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
         "packagesPath": "C:\\Users\\ALP54\\.nuget\\packages\\",
-        "outputPath": "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\obj\\",
+        "outputPath": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\ALP54\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -178,8 +184,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
-                "projectPath": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj"
+              "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj": {
+                "projectPath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj"
               }
             }
           }
