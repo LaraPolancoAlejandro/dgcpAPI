@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using dgcp.api;
+using HtmlAgilityPack;
+
+
 
 
 namespace dgcp.infrastructure.Services
@@ -21,7 +24,7 @@ namespace dgcp.infrastructure.Services
             _configuration = configuration;
         }
 
-        public async Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default)
+        public async Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default, string? empresa = default)
         {
             var paged = new Paged<TenderFinal>(page, limit);
             IQueryable<TenderFinal> query = this._ctx.TendersFinal;
@@ -36,6 +39,13 @@ namespace dgcp.infrastructure.Services
                 query = query.Where(t => t.StartDate <= endDate.Value);
             }
 
+            // Si se proporciona un valor para 'empresa', filtra los tenders por ese valor
+            if (!string.IsNullOrEmpty(empresa))
+            {
+                // Suponiendo que 'EmpresaIds' es una cadena de IDs de empresas separadas por comas
+                query = query.Where(t => t.EmpresaIds.Contains(empresa));
+            }
+
             paged.Items = await query.OrderByDescending(x => x.StartDate)
                 .Skip(paged.Skip)
                 .Take(paged.Limit)
@@ -43,6 +53,7 @@ namespace dgcp.infrastructure.Services
 
             return paged;
         }
+
 
         public Task<List<string>> GetAllFinalOcidsAsync() => this._ctx.TendersFinal.Select(t => t.ReleaseOcid).ToListAsync();
 
@@ -89,24 +100,59 @@ namespace dgcp.infrastructure.Services
                     EmpresaIds = tender.EmpresaIds
                 };
 
+                // Realiza el web scraping para obtener la fase y el estado
+                var webData = await GetWebData(tender.DocumentUrl);
+                tenderFinal.Fase = webData[0];
+                tenderFinal.estado = webData[1];
+                tenderFinal.ProcedureType = webData[2];
+                tenderFinal.ContractType = webData[3];
                 _ctx.TendersFinal.Add(tenderFinal);
                 await _ctx.SaveChangesAsync();
             }
             else
             {
-                // El registro ya existe, puedes decidir qué hacer aquí.
-                //if (tender.Status != "active")
-                //{
-                //    // Si el estado ya no es 'active', elimina el registro
-                //    await RemoveTenderFinal(existingTender);
-                //}
-
-                // Si el estado sigue siendo 'active', actualiza el registro
-                // Copia las propiedades de 'tender' a 'existingTender' aquí
+                var webData = await GetWebData(tender.DocumentUrl);
+                existingTender.Fase = webData[0];
+                existingTender.estado = webData[1];
+                existingTender.ProcedureType = webData[2];
+                existingTender.ContractType = webData[3];
                 existingTender.EmpresaIds = tender.EmpresaIds;
                 await UpdateTenderFinalAsync(existingTender);
             }
         }
+        static async Task<string[]> GetWebData(string Documenturl)
+        {
+            try
+            {
+                var url = Documenturl;
+                var httpClient = new HttpClient();
+                var html = await httpClient.GetStringAsync(url);
+
+                var htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(html);
+
+                // Aquí es donde seleccionas el nodo específico que quieres extraer.
+                var currentPhaseNode = htmlDocument.DocumentNode.SelectSingleNode("//span[@id='fdsRequestSummaryInfo_tblDetail_trRowPhase_tdCell2_spnPhase']");
+                var statusNode = htmlDocument.DocumentNode.SelectSingleNode("//span[@id='fdsRequestSummaryInfo_tblDetail_trRowState_tdCell2_spnState']");
+                var procedureTypeNode = htmlDocument.DocumentNode.SelectSingleNode("//span[@id='fdsRequestSummaryInfo_tblDetail_trRowProcedureType_tdCell2_spnProcedureType']");
+                var contractTypeNode = htmlDocument.DocumentNode.SelectSingleNode("//span[@id='fdsObjectOfTheContract_tblDetail_trRowTypeOfContract_tdCell2_spnTypeOfContract']");
+
+                //Se retorna los resultados de la busqueda
+                return new[] {
+                    currentPhaseNode?.InnerText ?? "Desconocido",
+                    statusNode?.InnerText ?? "Desconocido",
+                    procedureTypeNode?.InnerText ?? "Desconocido",
+                    contractTypeNode?.InnerText ?? "Desconocido"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Aquí puedes manejar la excepción, por ejemplo, registrándola en un archivo de log o mostrándola en la consola.
+                Console.WriteLine($"Ocurrió un error al obtener los datos de la web: {ex.Message}");
+                return new[] { "Desconocido", "Desconocido", "Desconocido", "Desconocido" };
+            }
+        }
+
         public async Task AddVisitedUrlAsync(VisitedUrl visitedUrl)
         {
             await this._ctx.VisitedUrls.AddAsync(visitedUrl);
@@ -122,7 +168,7 @@ namespace dgcp.infrastructure.Services
             {
                 // Create a list to store the names of the companies
                 List<string> empresas = new List<string>();
-                List<int> empresaIds = new List<int>();
+                List<string> empresaIds = new List<string>();
 
                 // Determine which company the tender belongs to
                 foreach (var empresa in empresaSettings)
@@ -158,6 +204,7 @@ namespace dgcp.infrastructure.Services
                 var empresaSetting = new EmpresaSettings
                 {
                     Name = empresaConfig.Key,
+                    Id = empresaConfig["Id"],
                     Categories = empresaConfig.GetSection("Categories").GetChildren().Select(c => int.Parse(c.Value)).ToArray(),
                     Keywords = empresaConfig.GetSection("Keywords").GetChildren().Select(c => c.Value).ToArray()
                 };

@@ -10,7 +10,7 @@ public interface IDataService
 {
     Task SaveChangesAsync();
     //Task<Paged<Tender>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default);
-    Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default);
+    Task<Paged<TenderFinal>> GetTenderPagedAsync(int? page = default, int? limit = default, DateTime? startDate = default, DateTime? endDate = default, string? empresa = default);
     Task AddTenderAsync(Tender tender);
     Task<List<string>> GetAllFinalOcidsAsync();
     Task<List<VisitedUrl>> GetAllVisitedUrlsAsync();

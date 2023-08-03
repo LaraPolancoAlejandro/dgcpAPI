@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dgcp.infrastructure;
 
@@ -11,9 +12,11 @@ using dgcp.infrastructure;
 namespace dgcp.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230801184048_EstadoYfase")]
+    partial class EstadoYfase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +176,6 @@ namespace dgcp.infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ContractType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
 
@@ -195,9 +195,6 @@ namespace dgcp.infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Fase")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProcedureType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProcuringEntity")

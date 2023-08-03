@@ -18,5 +18,9 @@ public class TenderFinal
     public DateTime? EndDate { get; set; }
     public string DocumentUrl { get; set; }
     public string EmpresaIds { get; set; }
+    public string Fase {get; set; }
+    public string estado { get; set; }
+    public string ProcedureType { get; set; }
+    public string ContractType { get; set; }
 }
 

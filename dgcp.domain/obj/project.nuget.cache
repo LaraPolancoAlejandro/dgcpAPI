@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+6cDjDfyeMRl3QcHJWEqRil41m+3CMd7pyFniHvINrvhc9GuTTYZ0G1RFq5tMqQFXY42cHsBKNMjzOx4xE1cmg==",
+  "dgSpecHash": "aUHnu5SGqaWPGXP//nPNB9KViV9YkY6NISCzAky9khSO2EF32X0LlSAaEqo09h+RpeJmeqm1V/FcLHk6xBBJGg==",
   "success": true,
-  "projectFilePath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
+  "projectFilePath": "G:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

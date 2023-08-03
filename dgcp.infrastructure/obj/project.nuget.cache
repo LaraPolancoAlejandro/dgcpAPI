@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "YH4EjPiDZBUmPaTS1thomdD8H3KolnV5RPxHDnB1EXGGSQ36tWUnJa2GJ63lCyHmm0c2GjWjyi3Q2gKNeUu+kg==",
+  "dgSpecHash": "8/UXTeTeyJxDUzhqO4tmHTJpjQ0Nw7THMEfy6hOThZUhb/wqI7r6LYt2X4XgItQhjaG0lHrTGPiD2ohYkaaUxA==",
   "success": true,
-  "projectFilePath": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
+  "projectFilePath": "G:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\ALP54\\.nuget\\packages\\htmlagilitypack\\1.11.51\\htmlagilitypack.1.11.51.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
