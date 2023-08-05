@@ -1,0 +1,6 @@
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\appsettings.Development.json
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\appsettings.json
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\dgcp.api.pdb
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\dgcp.domain.pdb
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\dgcp.infrastructure.pdb
+D:\dgcp.api\dgcp.api\dgcp.api\obj\Release\net7.0\win-x64\PubTmp\Out\dgcp.api.exe

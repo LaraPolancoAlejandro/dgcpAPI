@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7z405igTpbAdSMnCncmkIJIG3f/qa11wCar4PrOPUEbjN6fnQkQb8sj6AqKodEzYIDM3Ygg8UT2kZ1weXvknUw==",
+  "dgSpecHash": "Te/RRgJpozBkmgjOqUd81MQSqL1z5UokZWugbF9EcZB3PHYOgJxZ1uqC4AooGI+zKba5Lsyz2fbHgD9TNWzANQ==",
   "success": true,
-  "projectFilePath": "G:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
+  "projectFilePath": "D:\\dgcp.api\\dgcp.api\\dgcp.api\\dgcp.api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "lF29nVp6STQq2dG8dTDOTj2Bn1L2CITQiV0HNBNf18Y=",
+  "Source": "dgcp.api",
+  "BasePath": "_content/dgcp.api",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
