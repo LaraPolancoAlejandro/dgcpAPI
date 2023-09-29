@@ -12,8 +12,8 @@ using dgcp.infrastructure;
 namespace dgcp.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230919171225_failedUrl")]
-    partial class failedUrl
+    [Migration("20230929023634_AddedUsers")]
+    partial class AddedUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,6 +277,26 @@ namespace dgcp.infrastructure.Migrations
                     b.HasIndex("TenderReleaseOcid");
 
                     b.ToTable("TenderItem");
+                });
+
+            modelBuilder.Entity("dgcp.domain.Models.User", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsProjectAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserNameOrEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("dgcp.domain.Models.VisitedUrl", b =>

@@ -273,7 +273,27 @@ namespace dgcp.infrastructure.Migrations
 
                     b.HasIndex("TenderReleaseOcid");
 
-                    b.ToTable("TenderItems");
+                    b.ToTable("TenderItem");
+                });
+
+            modelBuilder.Entity("dgcp.domain.Models.User", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsProjectAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserNameOrEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("dgcp.domain.Models.VisitedUrl", b =>

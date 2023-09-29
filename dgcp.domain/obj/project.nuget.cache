@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+6cDjDfyeMRl3QcHJWEqRil41m+3CMd7pyFniHvINrvhc9GuTTYZ0G1RFq5tMqQFXY42cHsBKNMjzOx4xE1cmg==",
+  "dgSpecHash": "+5fZ/wSH267eNxAm7AQP4byhD75hVEnNHOBVq9LoC0Q+0OagNKzVGI2JBOuUmdwLiB9G2/9G2y7xoOU5jEfl1A==",
   "success": true,
-  "projectFilePath": "D:\\dgcp.api\\dgcp.api\\dgcp.domain\\dgcp.domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\ALP54\\OneDrive\\Desktop\\dgcpAPI\\dgcp.domain\\dgcp.domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ALP54\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
