@@ -15,6 +15,9 @@ namespace dgcp.infrastructure
         public DbSet<Rubro> Rubros { get; set; }
         public DbSet<EmpresaKeyword> EmpresaKeywords { get; set; }
         public DbSet<EmpresaRubro> EmpresaRubros { get; set; }
+        public DbSet<CurrentUrl> CurrentUrls { get; set; }
+        public DbSet<FailedUrl> FailedUrls { get; set; }
+        public DbSet<TenderItem> TenderItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

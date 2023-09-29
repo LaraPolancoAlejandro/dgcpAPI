@@ -6,8 +6,6 @@ public class TenderFinal
     public string ReleaseOcid { get; set; }
     public string TenderId { get; set; }
     public string Publisher { get; set; }
-    public DateTime? PublishedDate { get; set; }
-    public string PublicationPolicy { get; set; }
     public string Description { get; set; }
     public DateTime? Date { get; set; }
     public string Status { get; set; }

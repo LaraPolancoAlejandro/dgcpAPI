@@ -22,6 +22,22 @@ namespace dgcp.infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("dgcp.domain.Models.CurrentUrl", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CurrentIndex")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CurrentUrls");
+                });
+
             modelBuilder.Entity("dgcp.domain.Models.Empresa", b =>
                 {
                     b.Property<int>("ID")
@@ -66,6 +82,31 @@ namespace dgcp.infrastructure.Migrations
                     b.HasIndex("RubroID");
 
                     b.ToTable("EmpresaRubros");
+                });
+
+            modelBuilder.Entity("dgcp.domain.Models.FailedUrl", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsPermanentlyFailed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RetryCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("VisitDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FailedUrls");
                 });
 
             modelBuilder.Entity("dgcp.domain.Models.Keyword", b =>
@@ -122,22 +163,12 @@ namespace dgcp.infrastructure.Migrations
                     b.Property<string>("DocumentUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmpresaIds")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ProcuringEntity")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("PublicationPolicy")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime?>("PublishedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Publisher")
                         .HasMaxLength(200)
@@ -203,12 +234,6 @@ namespace dgcp.infrastructure.Migrations
                     b.Property<string>("ProcuringEntity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PublicationPolicy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("PublishedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Publisher")
                         .HasColumnType("nvarchar(max)");
 
@@ -241,9 +266,6 @@ namespace dgcp.infrastructure.Migrations
                     b.Property<int>("Classification")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TenderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TenderReleaseOcid")
                         .HasColumnType("nvarchar(100)");
 
@@ -251,18 +273,25 @@ namespace dgcp.infrastructure.Migrations
 
                     b.HasIndex("TenderReleaseOcid");
 
-                    b.ToTable("TenderItem");
+                    b.ToTable("TenderItems");
                 });
 
             modelBuilder.Entity("dgcp.domain.Models.VisitedUrl", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
                     b.Property<string>("Url")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<DateTime>("VisitDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Url");
+                    b.HasKey("ID");
 
                     b.ToTable("VisitedUrls");
                 });

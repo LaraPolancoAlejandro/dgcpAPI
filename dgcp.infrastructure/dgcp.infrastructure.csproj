@@ -3,6 +3,17 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <LangVersion>preview</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <LangVersion>preview</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Migrations\20230914154855_CurrentUrl.Designer.cs" />
+	  <Compile Remove="Migrations\20230914155128_CurrentUrl.Designer.cs" />
+	  <Compile Remove="Migrations\20230914181637_CurrentUrlAddPK.Designer.cs" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.51" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />

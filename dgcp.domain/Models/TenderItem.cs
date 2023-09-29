@@ -3,8 +3,6 @@
 public class TenderItem
 {
     public Guid Id { get; set; }
-    public Guid TenderId { get; set; }
-
     // Rubro
     public int Classification { get; set; }
 

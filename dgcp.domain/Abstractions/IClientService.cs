@@ -9,4 +9,5 @@ public interface IClientService
 {
     Task<List<PageDto>> GetReleaseDataAsync(string host = default, int limit = 500, int year = 2023);
     Task<ReleaseRootDto> GetReleaseRootAsync(string url);
+    Task RetryFailedUrlsAsync();
 }

@@ -1,4 +1,6 @@
-﻿namespace dgcp.domain.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace dgcp.domain.Models;
 
 public class Tender
 {
@@ -7,8 +9,6 @@ public class Tender
     public string TenderId { get; set; }
 
     public string Publisher { get; set; }
-    public DateTime? PublishedDate { get; set; }
-    public string PublicationPolicy { get; set; }
 
     public required string Description { get; set; }
 
@@ -26,6 +26,7 @@ public class Tender
     public List<TenderItem> Items { get; set; } = new List<TenderItem>();
 
     public string DocumentUrl { get; set; }
+    [NotMapped]
     public string? EmpresaIds { get; set; }
 
 }
