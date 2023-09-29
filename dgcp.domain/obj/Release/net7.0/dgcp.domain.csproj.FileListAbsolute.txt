@@ -10,3 +10,15 @@ D:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.dll
 D:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\refint\dgcp.domain.dll
 D:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.pdb
 D:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\ref\dgcp.domain.dll
+G:\dgcp.api\dgcp.api\dgcp.domain\bin\Release\net7.0\dgcp.domain.deps.json
+G:\dgcp.api\dgcp.api\dgcp.domain\bin\Release\net7.0\dgcp.domain.dll
+G:\dgcp.api\dgcp.api\dgcp.domain\bin\Release\net7.0\dgcp.domain.pdb
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.csproj.AssemblyReference.cache
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.GeneratedMSBuildEditorConfig.editorconfig
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.AssemblyInfoInputs.cache
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.AssemblyInfo.cs
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.csproj.CoreCompileInputs.cache
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.dll
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\refint\dgcp.domain.dll
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.pdb
+G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\ref\dgcp.domain.dll
