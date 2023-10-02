@@ -18,7 +18,7 @@ namespace dgcp.infrastructure
         public DbSet<CurrentUrl> CurrentUrls { get; set; }
         public DbSet<FailedUrl> FailedUrls { get; set; }
         public DbSet<TenderItem> TenderItem { get; set; }
-
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

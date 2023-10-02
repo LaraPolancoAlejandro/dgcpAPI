@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "IjhZa+IUiZuolV07gGSaIb5hfskz6thveqsHT1oR/RX8lT1n+egSOXhx8dT+OW38cXmyZoWL48b03rcTEhu1wg==",
+  "dgSpecHash": "S5yeeDBKg4WlKsABvcltdxDFMas08ljO80wiHEornnzZ/IbyBtCVFYabS7bop+xc6guEhdju3yJHD6zqgYY7Lw==",
   "success": true,
-  "projectFilePath": "D:\\dgcp.api\\dgcp.api\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\ALP54\\OneDrive\\Desktop\\dgcpAPI\\dgcp.infrastructure\\dgcp.infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\ALP54\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\htmlagilitypack\\1.11.51\\htmlagilitypack.1.11.51.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
@@ -25,6 +26,7 @@
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
+    "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.http\\6.0.0\\microsoft.extensions.http.6.0.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\ALP54\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
