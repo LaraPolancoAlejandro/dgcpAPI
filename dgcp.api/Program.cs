@@ -53,7 +53,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseCors();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -66,4 +66,6 @@ app.MapGet("/api/v1/tenders", (IDataService service, int? page, int? limit, Date
 
 //.WithOpenApi();
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Run($"http://*:{port}/");
+

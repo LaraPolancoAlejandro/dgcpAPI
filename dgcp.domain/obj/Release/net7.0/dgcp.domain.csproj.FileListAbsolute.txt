@@ -22,3 +22,15 @@ G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.dll
 G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\refint\dgcp.domain.dll
 G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\dgcp.domain.pdb
 G:\dgcp.api\dgcp.api\dgcp.domain\obj\Release\net7.0\ref\dgcp.domain.dll
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\bin\Release\net7.0\dgcp.domain.deps.json
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\bin\Release\net7.0\dgcp.domain.dll
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\bin\Release\net7.0\dgcp.domain.pdb
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.csproj.AssemblyReference.cache
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.AssemblyInfoInputs.cache
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.AssemblyInfo.cs
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.csproj.CoreCompileInputs.cache
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.dll
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\refint\dgcp.domain.dll
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\dgcp.domain.pdb
+C:\Users\ALP54\OneDrive\Desktop\dgcpAPI\dgcp.domain\obj\Release\net7.0\ref\dgcp.domain.dll
